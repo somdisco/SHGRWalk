@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="class-means" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Class Means</h1>
 <p>The class-wise mean intensities were derived from Gaussian Random Walks (bounded within the range [5, 995]) across the synthetic spectral channels (which serve the role of time in a standard random walk). The starting point of each mean walk was sampled uniformly from [50, 950]. The change at each step was sampled <span class="math inline">\(N(\mu,5)\)</span>, where <span class="math inline">\(\mu\)</span> was sampled uniformly from <span class="math inline">\({−8, −4, 0, 4, 8}\)</span>. At any point where the random walk hit (surpassed) the above boundaries, a new <span class="math inline">\(\mu\)</span> with opposite sign was selected (uniformly, from the same set). Random change points were also selected where the mean trend was reversed in the same manner. To produce mean spectral intensities with more salient structure a LOWESS smoother <span class="citation">[<a href="#ref-Lowess">2</a>]</span> was applied across the dimensions (channels) to even out the mean walk trajectories.</p>
-<p><img src="SHGRWalk.README_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="SHGRWalk.README_files/figure-html/unnamed-chunk-3-2.png" width="672" /><img src="SHGRWalk.README_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<p><img src="SHGRWalk.README_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="SHGRWalk.README_files/figure-html/unnamed-chunk-5-2.png" width="672" /><img src="SHGRWalk.README_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
 </div>
 <h3> References</h3>
 <div id="refs" class="references">

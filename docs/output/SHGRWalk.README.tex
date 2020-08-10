@@ -145,14 +145,39 @@ The SHGRWalk Datasets (\textbf{S}ynthetic \textbf{H}yperspectral \textbf{G}aussi
 
 The synthetic spectra of each pixel of each cube were sampled from a Gaussian mixture distribution with either 8, 11, or 20 components (known as ``8class'', ``11class'' and ``20class'', respectively, from here on). By convention, each mixture component is labeled A - H (8class), A - K (11class) or A - T (20class). The samples from each class are arranged spatially within in a \(128 \times 128\) pixel (so, \(N = 16,384\)) image cube according to the class maps below, which were recyled from previous 6-dimensional hyperspectral cubes {[}\protect\hyperlink{ref-MerenyiJainVillmann}{1}{]}.
 
-\begin{center}\includegraphics[width=0.3\linewidth]{./figs/SGRW-8class-map-annotated} \includegraphics[width=0.3\linewidth]{./figs/SGRW-11class-map-annotated} \includegraphics[width=0.3\linewidth]{./figs/SGRW-20class-map-annotated} \end{center}
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{./figs/SGRW-8class-map-annotated} 
+
+}
+
+\caption{8class}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{./figs/SGRW-11class-map-annotated} 
+
+}
+
+\caption{11class}\label{fig:unnamed-chunk-3}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{./figs/SGRW-20class-map-annotated} 
+
+}
+
+\caption{20class}\label{fig:unnamed-chunk-4}
+\end{figure}
 
 \hypertarget{class-means}{%
 \section{Class Means}\label{class-means}}
 
 The class-wise mean intensities were derived from Gaussian Random Walks (bounded within the range {[}5, 995{]}) across the synthetic spectral channels (which serve the role of time in a standard random walk). The starting point of each mean walk was sampled uniformly from {[}50, 950{]}. The change at each step was sampled \(N(\mu,5)\), where \(\mu\) was sampled uniformly from \({−8, −4, 0, 4, 8}\). At any point where the random walk hit (surpassed) the above boundaries, a new \(\mu\) with opposite sign was selected (uniformly, from the same set). Random change points were also selected where the mean trend was reversed in the same manner. To produce mean spectral intensities with more salient structure a LOWESS smoother {[}\protect\hyperlink{ref-Lowess}{2}{]} was applied across the dimensions (channels) to even out the mean walk trajectories.
 
-\includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-3-1.pdf} \includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-3-2.pdf} \includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-3-3.pdf}
+\includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-5-1.pdf} \includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-5-2.pdf} \includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-5-3.pdf}
 
 \hypertarget{class-covariance-structures}{%
 \section{Class Covariance Structures}\label{class-covariance-structures}}
@@ -225,7 +250,7 @@ The above loads several items into the R workspace:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{SHGRctab} is a data frame containing fields ``label'' and ``color'' which defines the color mapping of labels visible in the above class maps.\\
+  \texttt{SHGRctab} is a data frame containing fields ``label'' and ``color'' which defines the color mapping of labels visible in the above class maps.\\
 \item
   \texttt{pixelmap\_SHGR()} is a function returning a two-column matrix containing the \((x,y)\) pixel coordinates of the spectra found in the rows of \(X\).
 \item

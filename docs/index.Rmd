@@ -49,12 +49,18 @@ The SHGRWalk Datasets (**S**ynthetic **H**yperspectral **G**aussian **R**andom *
 
 The synthetic spectra of each pixel of each cube were sampled from a Gaussian mixture distribution with either 8, 11, or 20 components (known as "8class", "11class" and "20class", respectively, from here on).  By convention, each mixture component is labeled A - H (8class), A - K (11class) or A - T (20class). The samples from each class are arranged spatially within in a $128 \times 128$ pixel (so, $N = 16,384$) image cube according to the class maps below, which were recyled from previous 6-dimensional hyperspectral cubes [@MerenyiJainVillmann]. 
 
-```{r, echo=FALSE,out.width="30%", fig.show='hold',fig.align='center', include=T}
-#knitr::include_graphics(c("./figs/SGRW-8class-map-annotated.png","./figs/SGRW-11class-map-annotated.png","./figs/SGRW-20class-map-annotated.png"), auto_pdf = T)
+```{r, echo=FALSE,out.width="70%", fig.show='hold',fig.align='center', include=T, fig.cap="8class"}
 knitr::include_graphics("./figs/SGRW-8class-map-annotated.png", auto_pdf = T)
+``` 
+
+```{r, echo=FALSE,out.width="70%", fig.show='hold',fig.align='center', include=T, fig.cap="11class"}
 knitr::include_graphics("./figs/SGRW-11class-map-annotated.png", auto_pdf = T)
+``` 
+
+```{r, echo=FALSE,out.width="70%", fig.show='hold',fig.align='center', include=T, fig.cap="20class"}
 knitr::include_graphics("./figs/SGRW-20class-map-annotated.png", auto_pdf = T)
 ``` 
+
 
 
 # Class Means 
@@ -132,7 +138,7 @@ load(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData"))
 
 The above loads several items into the R workspace: 
 
-* **SHGRctab** is a data frame containing fields "label" and "color" which defines the color mapping of labels visible in the above class maps.  
+* `SHGRctab` is a data frame containing fields "label" and "color" which defines the color mapping of labels visible in the above class maps.  
 * `pixelmap_SHGR()` is a function returning a two-column matrix containing the $(x,y)$ pixel coordinates of the spectra found in the rows of $X$. 
 * `convert_SHGR_mat2cube(datamat)` is a function to translate the SHGR data matrices (of dimension $N = 16,384 \times 100$) to data cubes (of dimension $128 \times 128 \times 100$). 
 * `convert_SHGR_cube2mat(datacube)` provides the reverse functionality 

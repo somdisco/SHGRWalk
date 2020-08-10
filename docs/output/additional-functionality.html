@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData&quot;</span>))</a></code></pre></div>
 <p>The above loads several items into the R workspace:</p>
 <ul>
-<li><strong>SHGRctab</strong> is a data frame containing fields “label” and “color” which defines the color mapping of labels visible in the above class maps.<br />
+<li><code>SHGRctab</code> is a data frame containing fields “label” and “color” which defines the color mapping of labels visible in the above class maps.<br />
 </li>
 <li><code>pixelmap_SHGR()</code> is a function returning a two-column matrix containing the <span class="math inline">\((x,y)\)</span> pixel coordinates of the spectra found in the rows of <span class="math inline">\(X\)</span>.</li>
 <li><code>convert_SHGR_mat2cube(datamat)</code> is a function to translate the SHGR data matrices (of dimension <span class="math inline">\(N = 16,384 \times 100\)</span>) to data cubes (of dimension <span class="math inline">\(128 \times 128 \times 100\)</span>).</li>
