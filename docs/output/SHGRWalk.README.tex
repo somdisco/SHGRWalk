@@ -1,0 +1,250 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={The SHGRWalk Cubes},
+            pdfauthor={Josh Taylor},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+\usepackage{bbold}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+
+\title{The SHGRWalk Cubes}
+\providecommand{\subtitle}[1]{}
+\subtitle{Synthetic Hyperspectral Data}
+\author{Josh Taylor}
+\date{05-July-2020}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{preface}{%
+\section*{Preface}\label{preface}}
+\addcontentsline{toc}{section}{Preface}
+
+The SHGRWalk Datasets (\textbf{S}ynthetic \textbf{H}yperspectral \textbf{G}aussian \textbf{R}andom \textbf{W}alk, or \textbf{SHGR} for short) are synthetically generated 100-dimensional hyperspectral image cubes. Each hyperspectral cube exhibits differing structural and probabilistic characteristics, as outlined below. They are made available as binary .rds files for R.
+
+\hypertarget{shgr-class-maps}{%
+\section{SHGR Class Maps}\label{shgr-class-maps}}
+
+The synthetic spectra of each pixel of each cube were sampled from a Gaussian mixture distribution with either 8, 11, or 20 components (known as ``8class'', ``11class'' and ``20class'', respectively, from here on). By convention, each mixture component is labeled A - H (8class), A - K (11class) or A - T (20class). The samples from each class are arranged spatially within in a \(128 \times 128\) pixel (so, \(N = 16,384\)) image cube according to the class maps below, which were recyled from previous 6-dimensional hyperspectral cubes {[}\protect\hyperlink{ref-MerenyiJainVillmann}{1}{]}.
+
+\begin{center}\includegraphics[width=0.3\linewidth]{./figs/SGRW-8class-map-annotated} \includegraphics[width=0.3\linewidth]{./figs/SGRW-11class-map-annotated} \includegraphics[width=0.3\linewidth]{./figs/SGRW-20class-map-annotated} \end{center}
+
+\hypertarget{class-means}{%
+\section{Class Means}\label{class-means}}
+
+The class-wise mean intensities were derived from Gaussian Random Walks (bounded within the range {[}5, 995{]}) across the synthetic spectral channels (which serve the role of time in a standard random walk). The starting point of each mean walk was sampled uniformly from {[}50, 950{]}. The change at each step was sampled \(N(\mu,5)\), where \(\mu\) was sampled uniformly from \({−8, −4, 0, 4, 8}\). At any point where the random walk hit (surpassed) the above boundaries, a new \(\mu\) with opposite sign was selected (uniformly, from the same set). Random change points were also selected where the mean trend was reversed in the same manner. To produce mean spectral intensities with more salient structure a LOWESS smoother {[}\protect\hyperlink{ref-Lowess}{2}{]} was applied across the dimensions (channels) to even out the mean walk trajectories.
+
+\includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-3-1.pdf} \includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-3-2.pdf} \includegraphics{SHGRWalk.README_files/figure-latex/unnamed-chunk-3-3.pdf}
+
+\hypertarget{class-covariance-structures}{%
+\section{Class Covariance Structures}\label{class-covariance-structures}}
+
+SHGR data was generated both with and without component-wise correlation. The correlation structures, when applied, were also randomly sampled from {[}0.4, 0.9{]} and structured according to the Toeplitz model of {[}\protect\hyperlink{ref-Toeplitz}{3}{]}. Mixtures with a component-wise correlation structure are denoted by ``SHGR-cov'', whereas mixtures with spherical component densities are denoted by ``SHGR-var''.Two variance levels have been added to each of the component-wise correlation matrices introduced above. We define ``Low Noise'' cases as those with components whose dimension-wise variances were sampled uniformly from {[}100 − 500{]} and ``High Noise'' cases with variances sampled from {[}500 − 4000{]}.
+
+\hypertarget{obtaining-shgr-image-cubes}{%
+\section{Obtaining SHGR Image Cubes}\label{obtaining-shgr-image-cubes}}
+
+SHGRWalk image cubes can be sourced in .rds format directly from git. The url for the 8class cube with uncorrellated low noise is below. Other cubes can be obtained by changing 8class to either 11class or 20class, var to cov, and 100-500 to 500-4000, as desired.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SHGR8.var.lo =}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{url}\NormalTok{(}\StringTok{"https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_8class_var100-500.rds"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Each SHGR \(\texttt{.rds}\) file returns a list with components
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{str\_class} a string denoting whether the sourced file is 8class, 11class, or 20class
+\item
+  \textbf{str\_vcov} a string denoting the correlation structure and variance level defining the component-wise covariance matrices
+\item
+  \textbf{X} a data matrix of the pixel spectra (nrows = 16,384, ncol = 100)
+\item
+  \textbf{label} a vector of character labels of each pixel (length = 16,384)
+\item
+  \textbf{mix\_w} the component mixing weights underlying the true Gaussian mixture distribution
+\item
+  \textbf{mix\_mu} a matrix of component means, in rows
+\item
+  \textbf{mix\_sigma} an array of component covariance matrices, in slices
+\item
+  \textbf{mix\_label} a vector of character labels of each component
+\end{itemize}
+
+Example output from the 8class cube with uncorrellated low noise:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(SHGR8.var.lo)}
+\CommentTok{## List of 8}
+\CommentTok{##  $ str_class: chr "8class"}
+\CommentTok{##  $ str_vcov : chr "var100-500"}
+\CommentTok{##  $ X        : num [1:16384, 1:100] 313 313 309 328 321 ...}
+\CommentTok{##  $ label    : chr [1:16384] "A" "A" "A" "A" ...}
+\CommentTok{##  $ mix_w    : num [1:8] 0.25 0.25 0.125 0.0625 0.0625 0.0625 0.0625 0.125}
+\CommentTok{##  $ mix_mu   : num [1:8, 1:100] 307 687 1040 659 150 ...}
+\CommentTok{##  $ mix_sigma: num [1:100, 1:100, 1:8] 206 0 0 0 0 ...}
+\CommentTok{##  $ mix_label: chr [1:8] "A" "B" "C" "D" ...}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{additional-functionality}{%
+\section{Additional Functionality}\label{additional-functionality}}
+
+Minor functionality for manipulating the cube structures is found in the associated SHGR\_aux file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\KeywordTok{url}\NormalTok{(}\StringTok{"https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+The above loads several items into the R workspace:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{SHGRctab} is a data frame containing fields ``label'' and ``color'' which defines the color mapping of labels visible in the above class maps.\\
+\item
+  \texttt{pixelmap\_SHGR()} is a function returning a two-column matrix containing the \((x,y)\) pixel coordinates of the spectra found in the rows of \(X\).
+\item
+  \texttt{convert\_SHGR\_mat2cube(datamat)} is a function to translate the SHGR data matrices (of dimension \(N = 16,384 \times 100\)) to data cubes (of dimension \(128 \times 128 \times 100\)).
+\item
+  \texttt{convert\_SHGR\_cube2mat(datacube)} provides the reverse functionality
+\end{itemize}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-MerenyiJainVillmann}{}%
+{[}1{]} E. Merényi, A. Jain, and T. Villmann, ``Explicit magnification control of self-organizing maps for `forbidden' data,'' \emph{IEEE Transactions on Neural Networks}, vol. 18, no. 3, pp. 786--797, 2007.
+
+\leavevmode\hypertarget{ref-Lowess}{}%
+{[}2{]} W. S. Cleveland, ``Robust locally weighted regression and smoothing scatterplots,'' \emph{Journal of the American Statistical Association}, vol. 74, no. 368, pp. 829--836, 1979.
+
+\leavevmode\hypertarget{ref-Toeplitz}{}%
+{[}3{]} J. Hardin, S. R. Garcia, and D. Golan, ``A method for generating realistic correlation matrices,'' \emph{The Annals of Applied Statistics}, vol. 7, no. 3, pp. 1733--1762, 2013.
+
+\end{document}

@@ -1,0 +1,162 @@
+---
+title: "The SHGRWalk Cubes"
+subtitle: "Synthetic Hyperspectral Data"  
+author: "Josh Taylor"
+date: "05-July-2020"
+site: bookdown::bookdown_site
+#documentclass: book
+documentclass: article
+bibliography: [SHGRWalk_demo.bib]
+#csl: "ieee.csl"
+#link-citations: yes
+output:
+  bookdown::gitbook: default
+  bookdown::pdf_book: 
+    includes:
+      in_header: preamble.tex
+    latex_engine: xelatex
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = T, collapse = T)
+```
+
+```{r, echo = F}
+load(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData"))
+SHGR8cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_8class_cov100-500.rds"))
+SHGR11cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_11class_cov100-500.rds"))
+SHGR20cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_20class_cov100-500.rds"))
+
+library(ggplot2)
+mymelt = function(X, label = NULL) {
+  out = data.frame(x = rep(1:ncol(X), each = nrow(X)), y = c(X), obs = rep(1:nrow(X),times=ncol(X)))
+  if(!is.null(label)) {
+    out$label = rep(label, times = ncol(X))
+  }
+  return(out)
+}
+```
+
+
+
+# Preface {-}
+
+The SHGRWalk Datasets (**S**ynthetic **H**yperspectral **G**aussian **R**andom **W**alk, or **SHGR** for short) are synthetically generated 100-dimensional hyperspectral image cubes.  Each hyperspectral cube exhibits differing structural and probabilistic characteristics, as outlined below.  They are made available as binary .rds files for R. 
+
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
+---
+title: "The SHGRWalk Cubes"
+subtitle: "Synthetic Hyperspectral Data"  
+author: "Josh Taylor"
+date: "05-July-2020"
+site: bookdown::bookdown_site
+#documentclass: book
+documentclass: article
+bibliography: [SHGRWalk_demo.bib]
+#csl: "ieee.csl"
+#link-citations: yes
+output:
+  bookdown::gitbook: default
+  bookdown::pdf_book: 
+    includes:
+      in_header: preamble.tex
+    latex_engine: xelatex
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = T, collapse = T)
+```
+
+```{r, echo = F}
+load(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData"))
+SHGR8cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_8class_cov100-500.rds"))
+SHGR11cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_11class_cov100-500.rds"))
+SHGR20cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_20class_cov100-500.rds"))
+
+library(ggplot2)
+mymelt = function(X, label = NULL) {
+  out = data.frame(x = rep(1:ncol(X), each = nrow(X)), y = c(X), obs = rep(1:nrow(X),times=ncol(X)))
+  if(!is.null(label)) {
+    out$label = rep(label, times = ncol(X))
+  }
+  return(out)
+}
+```
+
+
+
+# Preface {-}
+
+The SHGRWalk Datasets (**S**ynthetic **H**yperspectral **G**aussian **R**andom **W**alk, or **SHGR** for short) are synthetically generated 100-dimensional hyperspectral image cubes.  Each hyperspectral cube exhibits differing structural and probabilistic characteristics, as outlined below.  They are made available as binary .rds files for R. 
+
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
+---
+title: "The SHGRWalk Cubes"
+subtitle: "Synthetic Hyperspectral Data"  
+author: "Josh Taylor"
+date: "05-July-2020"
+site: bookdown::bookdown_site
+#documentclass: book
+documentclass: article
+bibliography: [SHGRWalk_demo.bib]
+#csl: "ieee.csl"
+#link-citations: yes
+output:
+  bookdown::gitbook: default
+  bookdown::pdf_book: 
+    includes:
+      in_header: preamble.tex
+    latex_engine: xelatex
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = T, collapse = T)
+```
+
+```{r, echo = F}
+load("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData")
+SHGR8cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_8class_cov100-500.rds"))
+SHGR11cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_11class_cov100-500.rds"))
+SHGR20cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_20class_cov100-500.rds"))
+
+library(ggplot2)
+mymelt = function(X, label = NULL) {
+  out = data.frame(x = rep(1:ncol(X), each = nrow(X)), y = c(X), obs = rep(1:nrow(X),times=ncol(X)))
+  if(!is.null(label)) {
+    out$label = rep(label, times = ncol(X))
+  }
+  return(out)
+}
+```
+
+
+
+# Preface {-}
+
+The SHGRWalk Datasets (**S**ynthetic **H**yperspectral **G**aussian **R**andom **W**alk, or **SHGR** for short) are synthetically generated 100-dimensional hyperspectral image cubes.  Each hyperspectral cube exhibits differing structural and probabilistic characteristics, as outlined below.  They are made available as binary .rds files for R. 
+
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
+
+<!--chapter:end:NeuroScopeIO.README.Rmd-->
+
+
+<!--chapter:end:NeuroScopeIO.README.Rmd-->
+

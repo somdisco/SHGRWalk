@@ -1,0 +1,142 @@
+---
+title: "The SHGRWalk Cubes"
+subtitle: "Synthetic Hyperspectral Data"  
+author: "Josh Taylor"
+date: "05-July-2020"
+site: bookdown::bookdown_site
+#documentclass: book
+documentclass: article
+bibliography: [SHGRWalk_demo.bib]
+csl: "ieee.csl"
+link-citations: yes
+output:
+  bookdown::gitbook: default
+  bookdown::pdf_book: 
+    includes:
+      in_header: preamble.tex
+    latex_engine: xelatex
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = T, collapse = T)
+```
+
+```{r, echo = F}
+load(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData"))
+SHGR8cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_8class_cov100-500.rds"))
+SHGR11cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_11class_cov100-500.rds"))
+SHGR20cov100 = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_20class_cov100-500.rds"))
+
+library(ggplot2)
+mymelt = function(X, label = NULL) {
+  out = data.frame(x = rep(1:ncol(X), each = nrow(X)), y = c(X), obs = rep(1:nrow(X),times=ncol(X)))
+  if(!is.null(label)) {
+    out$label = rep(label, times = ncol(X))
+  }
+  return(out)
+}
+```
+
+
+
+# Preface {-}
+
+The SHGRWalk Datasets (**S**ynthetic **H**yperspectral **G**aussian **R**andom **W**alk, or **SHGR** for short) are synthetically generated 100-dimensional hyperspectral image cubes.  Each hyperspectral cube exhibits differing structural and probabilistic characteristics, as outlined below.  They are made available as binary .rds files for R. 
+
+
+# SHGR Class Maps 
+
+The synthetic spectra of each pixel of each cube were sampled from a Gaussian mixture distribution with either 8, 11, or 20 components (known as "8class", "11class" and "20class", respectively, from here on).  By convention, each mixture component is labeled A - H (8class), A - K (11class) or A - T (20class). The samples from each class are arranged spatially within in a $128 \times 128$ pixel (so, $N = 16,384$) image cube according to the class maps below, which were recyled from previous 6-dimensional hyperspectral cubes [@MerenyiJainVillmann]. 
+
+```{r, echo=FALSE,out.width="30%", fig.show='hold',fig.align='center', include=T}
+#knitr::include_graphics(c("./figs/SGRW-8class-map-annotated.png","./figs/SGRW-11class-map-annotated.png","./figs/SGRW-20class-map-annotated.png"), auto_pdf = T)
+knitr::include_graphics("./figs/SGRW-8class-map-annotated.png", auto_pdf = T)
+knitr::include_graphics("./figs/SGRW-11class-map-annotated.png", auto_pdf = T)
+knitr::include_graphics("./figs/SGRW-20class-map-annotated.png", auto_pdf = T)
+``` 
+
+
+# Class Means 
+
+The class-wise mean intensities were derived from Gaussian Random Walks (bounded within the range [5, 995]) across the synthetic spectral channels (which serve the role of time in a standard random walk). The starting point of each mean walk was sampled uniformly from [50, 950]. The change at each step was sampled $N(\mu,5)$, where $\mu$ was sampled uniformly from ${−8, −4, 0, 4, 8}$. At any point where the random walk hit (surpassed) the above boundaries, a new $\mu$ with opposite sign was selected (uniformly, from the same set). Random change points were also selected where the mean trend was reversed in the same manner. To produce mean spectral intensities with more salient structure a LOWESS smoother [@Lowess] was applied across the dimensions (channels) to even out the mean walk trajectories.
+
+```{r, echo = F}
+plotdf = mymelt(SHGR8cov100$mix_mu, SHGR8cov100$mix_label)
+g8 = ggplot(data = plotdf) +  
+  geom_line(aes(x=x, y=y, color=label, group=label), size = 2) + 
+  scale_color_manual(values = SHGRctab$color) + 
+  scale_y_continuous(name = "Intensity", breaks = seq(0,1200,by=200), labels = seq(0,1200,by=200)) + 
+  scale_x_continuous(name = "Channel", breaks=c(1,seq(10,100,by=10)), labels = c(1,seq(10,100,by=10))) + 
+  ggpubr::theme_pubclean() + theme(legend.position = "none") + 
+  ggtitle("8class")
+print(g8)
+
+plotdf = mymelt(SHGR11cov100$mix_mu, SHGR11cov100$mix_label)
+g11 = ggplot(data = plotdf) +  
+  geom_line(aes(x=x, y=y, color=label, group=label), size = 2) + 
+  scale_color_manual(values = SHGRctab$color) + 
+  scale_y_continuous(name = "Intensity", breaks = seq(0,1200,by=200), labels = seq(0,1200,by=200)) + 
+  scale_x_continuous(name = "Channel", breaks=c(1,seq(10,100,by=10)), labels = c(1,seq(10,100,by=10))) + 
+  ggpubr::theme_pubclean() + theme(legend.position = "none") + 
+  ggtitle("11class")
+print(g11)
+
+plotdf = mymelt(SHGR20cov100$mix_mu, SHGR20cov100$mix_label)
+g20 = ggplot(data = plotdf) +  
+  geom_line(aes(x=x, y=y, color=label, group=label), size = 2) + 
+  scale_color_manual(values = SHGRctab$color) + 
+  scale_y_continuous(name = "Intensity", breaks = seq(0,1200,by=200), labels = seq(0,1200,by=200)) + 
+  scale_x_continuous(name = "Channel", breaks=c(1,seq(10,100,by=10)), labels = c(1,seq(10,100,by=10))) + 
+  ggpubr::theme_pubclean() + theme(legend.position = "none") + 
+  ggtitle("20class")
+print(g20)
+```
+
+# Class Covariance Structures
+
+SHGR data was generated both with and without component-wise correlation. The correlation structures, when applied, were also randomly sampled from [0.4, 0.9] and structured according to the Toeplitz model of [@Toeplitz]. Mixtures with a component-wise correlation structure are denoted by "SHGR-cov", whereas mixtures with spherical component densities are denoted by "SHGR-var".Two variance levels have been added to each of the component-wise correlation matrices introduced above. We define “Low Noise” cases as those with components whose dimension-wise variances were sampled uniformly from [100 − 500] and “High Noise” cases with variances sampled from [500 − 4000].
+
+
+# Obtaining SHGR Image Cubes
+
+SHGRWalk image cubes can be sourced in .rds format directly from git. The url for the 8class cube with uncorrellated low noise is below. Other cubes can be obtained by changing 8class to either 11class or 20class, var to cov, and 100-500 to 500-4000, as desired.  
+```{r}
+SHGR8.var.lo = readRDS(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_100d_8class_var100-500.rds"))
+```
+
+Each SHGR $\texttt{.rds}$ file returns a list with components
+
+* **str_class** a string denoting whether the sourced file is 8class, 11class, or 20class 
+* **str_vcov** a string denoting the correlation structure and variance level defining the component-wise covariance matrices 
+* **X** a data matrix of the pixel spectra (nrows = 16,384, ncol = 100) 
+* **label** a vector of character labels of each pixel (length = 16,384)
+* **mix_w** the component mixing weights underlying the true Gaussian mixture distribution
+* **mix_mu** a matrix of component means, in rows 
+* **mix_sigma** an array of component covariance matrices, in slices 
+* **mix_label** a vector of character labels of each component 
+
+Example output from the 8class cube with uncorrellated low noise: 
+
+```{r}
+str(SHGR8.var.lo)
+```
+
+# Additional Functionality 
+
+Minor functionality for manipulating the cube structures is found in the associated SHGR_aux file: 
+
+```{r}
+load(url("https://github.com/somdisco/SHGRWalk/raw/master/SHGR_aux.RData"))
+```
+
+The above loads several items into the R workspace: 
+
+* **SHGRctab** is a data frame containing fields "label" and "color" which defines the color mapping of labels visible in the above class maps.  
+* `pixelmap_SHGR()` is a function returning a two-column matrix containing the $(x,y)$ pixel coordinates of the spectra found in the rows of $X$. 
+* `convert_SHGR_mat2cube(datamat)` is a function to translate the SHGR data matrices (of dimension $N = 16,384 \times 100$) to data cubes (of dimension $128 \times 128 \times 100$). 
+* `convert_SHGR_cube2mat(datacube)` provides the reverse functionality 
+
+# References
+
+
